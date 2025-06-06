@@ -98,20 +98,34 @@ namespace büscherverwaltung
                 }
             }
         }
-
-        private void button3_Click(object sender, EventArgs e)
+        private bool checkvalid()
         {
+            // Check if a book is selected
             if (p_selectedbook == -1)
             {
-                MessageBox.Show("Please select a book first.");
-                return;
+                MessageBox.Show("Bitte wähle ein Buch aus.");
+                return false;
             }
             if (buscher.büscherregal[p_selectedbook].isborrowed)
             {
-                MessageBox.Show("This book is already borrowed.");
-                return;
+                MessageBox.Show("Dieses Buch ist bereits ausgeliehen.");
+                return false;
             }
+            return true;
+        }
+        //borrow
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (!checkvalid()) return; // Exit if the book is not valid for borrowing
             borrow.ShowDialog();
+        }
+
+        // Fix for CS0021 and CS0201 errors in the "button4_Click" method  
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (!checkvalid()) return; // Exit if the book is not valid for borrowing    
+            buscher.büscherregal.RemoveAt(p_selectedbook); 
+            list();
         }
     }
 }

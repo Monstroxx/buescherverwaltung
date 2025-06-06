@@ -29,7 +29,6 @@ namespace büscherverwaltung
         {
             var selectedBook = buscher.büscherregal[form.p_selectedbook];
             info_p.Items.Clear();
-            info_p.Items.Clear();
             info_p.Items.Add(selectedBook.title);
             info_p.Items.Add(selectedBook.isbn);
             info_p.Items.Add(selectedBook.sellprice.ToString() + " €");
