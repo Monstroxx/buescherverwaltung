@@ -33,24 +33,38 @@ namespace büscherverwaltung
             info_p.Items.Add(selectedBook.title);
             info_p.Items.Add(selectedBook.isbn);
             info_p.Items.Add(selectedBook.sellprice.ToString() + " €");
-            info_p.Items.Add(selectedBook.bisausgeliehn.ToString("d")); // Format date as short date string
+
+            //reset inputs
+            name_i.Text = "";
+            firstname_i.Text = "";
+            email_i.Text = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            humans.people.Add(new Humans.Person()
+            // Erstelle eine neue Person
+            var newPerson = new Humans.Person()
             {
                 lastname = name_i.Text,
                 firtname = firstname_i.Text,
                 email = email_i.Text,
-                borrowed_books = human_borrowed.borrowed_books.Add(new human_borrowed.borrowed_book()
-                {
-                    bookid = buscher.büscherregal[form.p_selectedbook].id
-                }),
+                Humanid = humans.people.Count + 1
+            };
+            
+            // Füge das ausgeliehene Buch zur Liste der Person hinzu
+            newPerson.borrowed_books.Add(new human_borrowed.borrowed_book()
+            {
+                bookid = form.p_selectedbook // Verwende den Index als ID
             });
-            buscher.büscherregal[form.p_selectedbook].bisausgeliehn = DateTime.Now; // Set the borrow date to now  
-            form.list(); // Update the book list in the main form
-            this.Close(); // Close the borrow form
+            
+            // Füge die Person zur Liste hinzu
+            humans.people.Add(newPerson);
+            
+            // Markiere das Buch als ausgeliehen
+            buscher.büscherregal[form.p_selectedbook].bisausgeliehn = DateTime.Now;
+            
+            form.list(); // Update die Bücherliste
+            this.Close(); // Schließe das Fenster
         }
     }
 }

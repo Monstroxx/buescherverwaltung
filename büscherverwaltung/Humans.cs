@@ -22,6 +22,11 @@ namespace büscherverwaltung
             public string email;
             public int Humanid;
             public List<human_borrowed.borrowed_book> borrowed_books;
+            
+            public Person()
+            {
+                borrowed_books = new List<human_borrowed.borrowed_book>();
+            }
         }
     }
 }

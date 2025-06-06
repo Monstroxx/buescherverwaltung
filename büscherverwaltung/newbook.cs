@@ -18,6 +18,10 @@ namespace büscherverwaltung
             InitializeComponent();
             this.buscher = buscher;
             this.form = form;
+            //reset inputs
+            booktitle_i.Text = "";
+            isbn_i.Text = "";
+            sellprice_i.Text = "";
         }
 
         private void button1_Click(object sender, EventArgs e)

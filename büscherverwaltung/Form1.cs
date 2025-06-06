@@ -22,9 +22,9 @@ namespace büscherverwaltung
         {
             InitializeComponent();
             // Initialize
+            humans = new Humans(human_borrowed);
             newbook = new newbook(buscher, this);
             borrow = new borrow(buscher, humans, this, human_borrowed);
-            humans = new Humans(human_borrowed);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -79,18 +79,20 @@ namespace büscherverwaltung
                 info_p.Items.Add(selectedBook.title);
                 info_p.Items.Add(selectedBook.isbn);
                 info_p.Items.Add(selectedBook.sellprice.ToString() + " €");
-                info_p.Items.Add(selectedBook.bisausgeliehn.ToString("d")); // Format date as short date string
-                info_p.Items.Add(selectedBook.isborrowed ? "Ausgeliehen" : "Verfügbar");
                 //if book is borrowed, show human who borrowed it
                 if (selectedBook.isborrowed)
                 {
                     for (int i = 0; i < humans.people.Count; i++)
                     {
-                        if (humans.people[i].Humanid == selectedBook.idHuman)
+                        for (int j = 0; j < humans.people[i].borrowed_books.Count; j++)
                         {
-                            var human = humans.people[i];
-                            info_p.Items.Add($"Ausgeliehen von: " + human.firtname + " " + human.lastname);
-                            break; // Exit loop after finding the human
+                            if (humans.people[i].borrowed_books[j].bookid == selectedIndex)
+                            {
+                                info_p.Items.Add("Ausgeliehen von: " + humans.people[i].firtname + " " + humans.people[i].lastname);
+                                info_p.Items.Add("Email: " + humans.people[i].email);
+                                info_p.Items.Add("Bis zum: " + selectedBook.bisausgeliehn.ToString("dd.mm.yyyy "));
+                                break; // Stop after finding the first match
+                            }
                         }
                     }
                 }
@@ -102,6 +104,11 @@ namespace büscherverwaltung
             if (p_selectedbook == -1)
             {
                 MessageBox.Show("Please select a book first.");
+                return;
+            }
+            if (buscher.büscherregal[p_selectedbook].isborrowed)
+            {
+                MessageBox.Show("This book is already borrowed.");
                 return;
             }
             borrow.ShowDialog();

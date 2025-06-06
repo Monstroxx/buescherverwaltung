@@ -15,7 +15,7 @@ namespace büscherverwaltung
 
         public class borrowed_book
         {
-            int bookId; // ID of the borrowed book
+            public int bookid; // ID of the borrowed book
         }
     }
 }
