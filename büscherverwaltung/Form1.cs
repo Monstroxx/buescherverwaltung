@@ -12,7 +12,8 @@ namespace büscherverwaltung
     public partial class Form1 : Form
     {
         public books buscher = new books();
-        Humans humans = new Humans();
+        Humans humans;
+        human_borrowed human_borrowed = new human_borrowed();
         newbook newbook;
         borrow borrow;
         public int p_selectedbook = -1;
@@ -22,7 +23,8 @@ namespace büscherverwaltung
             InitializeComponent();
             // Initialize
             newbook = new newbook(buscher, this);
-            borrow = new borrow(buscher, humans, this);
+            borrow = new borrow(buscher, humans, this, human_borrowed);
+            humans = new Humans(human_borrowed);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -79,6 +81,19 @@ namespace büscherverwaltung
                 info_p.Items.Add(selectedBook.sellprice.ToString() + " €");
                 info_p.Items.Add(selectedBook.bisausgeliehn.ToString("d")); // Format date as short date string
                 info_p.Items.Add(selectedBook.isborrowed ? "Ausgeliehen" : "Verfügbar");
+                //if book is borrowed, show human who borrowed it
+                if (selectedBook.isborrowed)
+                {
+                    for (int i = 0; i < humans.people.Count; i++)
+                    {
+                        if (humans.people[i].Humanid == selectedBook.idHuman)
+                        {
+                            var human = humans.people[i];
+                            info_p.Items.Add($"Ausgeliehen von: " + human.firtname + " " + human.lastname);
+                            break; // Exit loop after finding the human
+                        }
+                    }
+                }
             }
         }
 

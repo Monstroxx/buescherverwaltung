@@ -22,6 +22,7 @@ namespace büscherverwaltung
             {
                 get { return bisausgeliehn != DateTime.MinValue; }
             }
+            public int idHuman; // ID of the human who borrowed the book, if any
         }
     }
 }

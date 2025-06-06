@@ -8,9 +8,11 @@ namespace büscherverwaltung
     public class Humans
     {
         public List<Person> people;
-        public Humans()
+        human_borrowed human_Borrowed1;
+        public Humans(human_borrowed human_Borrowed1)
         {
             people = new List<Person>();
+            this.human_Borrowed1 = human_Borrowed1;
         }
 
         public class Person
@@ -18,6 +20,8 @@ namespace büscherverwaltung
             public string firtname;
             public string lastname;
             public string email;
+            public int Humanid;
+            public List<human_borrowed.borrowed_book> borrowed_books;
         }
     }
 }
