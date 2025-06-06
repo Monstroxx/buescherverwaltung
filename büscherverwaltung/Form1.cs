@@ -16,6 +16,7 @@ namespace büscherverwaltung
         human_borrowed human_borrowed = new human_borrowed();
         newbook newbook;
         borrow borrow;
+        save_load save_Load;
         public int p_selectedbook = -1;
         public int verdienst;
 
@@ -26,12 +27,15 @@ namespace büscherverwaltung
             humans = new Humans(human_borrowed);
             newbook = new newbook(buscher, this);
             borrow = new borrow(buscher, humans, this, human_borrowed);
+            save_Load = new save_load(buscher,humans,human_borrowed);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             //verknüpft büscherregal_SelectedIndexChanged
             büscherregal.SelectedIndexChanged += büscherregal_SelectedIndexChanged;
+            save_Load.load(); // Load books and humans from file on startup
+            list();
         }
 
         //rand book
@@ -164,6 +168,12 @@ namespace büscherverwaltung
                 }
             }
             list();
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //Save
+            save_Load.save();
         }
     }
 }

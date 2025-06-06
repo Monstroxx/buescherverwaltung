@@ -23,6 +23,12 @@ namespace büscherverwaltung
             this.buscher = buscher;
             this.humans = humans;
             this.human_borrowed = human_borrowed;
+
+            // Create a new DateTimePicker control and initialize it.
+            DateTimePicker dateTimePicker1 = new DateTimePicker();
+            // Set the CustomFormat string.
+            dateTimePicker1.CustomFormat = "MM/dd/yyyy";
+            dateTimePicker1.Format = DateTimePickerFormat.Custom;
         }
 
         private void borrow_Load(object sender, EventArgs e)
@@ -58,10 +64,10 @@ namespace büscherverwaltung
             
             // Füge die Person zur Liste hinzu
             humans.people.Add(newPerson);
-            
+
             // Markiere das Buch als ausgeliehen
-            buscher.büscherregal[form.p_selectedbook].bisausgeliehn = DateTime.Now;
-            
+            buscher.büscherregal[form.p_selectedbook].bisausgeliehn = dateTimePicker1.Value; // Setze das Ausleihdatum
+
             form.list(); // Update die Bücherliste
             this.Close(); // Schließe das Fenster
         }

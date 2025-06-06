@@ -69,6 +69,7 @@
     <Compile Include="Humans.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="save-load.cs" />
     <EmbeddedResource Include="borrow.resx">
       <DependentUpon>borrow.cs</DependentUpon>
     </EmbeddedResource>
