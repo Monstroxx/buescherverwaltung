@@ -38,6 +38,10 @@
             this.button4 = new System.Windows.Forms.Button();
             this.büscherregal = new System.Windows.Forms.ListView();
             this.info_p = new System.Windows.Forms.ListBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.verdienst_l = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -78,7 +82,7 @@
             this.verwarungen.ItemHeight = 20;
             this.verwarungen.Location = new System.Drawing.Point(669, 441);
             this.verwarungen.Name = "verwarungen";
-            this.verwarungen.Size = new System.Drawing.Size(312, 124);
+            this.verwarungen.Size = new System.Drawing.Size(441, 124);
             this.verwarungen.TabIndex = 5;
             // 
             // label2
@@ -115,7 +119,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("Segoe UI Black", 16F);
-            this.button4.Location = new System.Drawing.Point(693, 582);
+            this.button4.Location = new System.Drawing.Point(908, 582);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(202, 58);
             this.button4.TabIndex = 10;
@@ -138,14 +142,47 @@
             this.info_p.ItemHeight = 20;
             this.info_p.Location = new System.Drawing.Point(669, 147);
             this.info_p.Name = "info_p";
-            this.info_p.Size = new System.Drawing.Size(312, 244);
+            this.info_p.Size = new System.Drawing.Size(441, 244);
             this.info_p.TabIndex = 11;
+            // 
+            // button5
+            // 
+            this.button5.Font = new System.Drawing.Font("Segoe UI Black", 16F);
+            this.button5.Location = new System.Drawing.Point(690, 582);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(202, 58);
+            this.button5.TabIndex = 12;
+            this.button5.Text = "return";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // verdienst_l
+            // 
+            this.verdienst_l.AutoSize = true;
+            this.verdienst_l.Font = new System.Drawing.Font("Segoe UI Black", 18F);
+            this.verdienst_l.Location = new System.Drawing.Point(12, 7);
+            this.verdienst_l.Name = "verdienst_l";
+            this.verdienst_l.Size = new System.Drawing.Size(234, 48);
+            this.verdienst_l.TabIndex = 13;
+            this.verdienst_l.Text = "Verdienst: 0";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.verdienst_l);
+            this.panel1.Location = new System.Drawing.Point(669, 26);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(350, 63);
+            this.panel1.TabIndex = 14;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 665);
+            this.ClientSize = new System.Drawing.Size(1131, 665);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.info_p);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -159,6 +196,8 @@
             this.Name = "Form1";
             this.Text = "library";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -175,6 +214,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ListView büscherregal;
         private System.Windows.Forms.ListBox info_p;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label verdienst_l;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

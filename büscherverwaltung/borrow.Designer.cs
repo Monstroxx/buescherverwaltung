@@ -118,9 +118,12 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(706, 379);
+            this.dateTimePicker1.Font = new System.Drawing.Font("Segoe UI Black", 18F);
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTimePicker1.Location = new System.Drawing.Point(695, 361);
+            this.dateTimePicker1.Margin = new System.Windows.Forms.Padding(5, 3, 3, 3);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 26);
+            this.dateTimePicker1.Size = new System.Drawing.Size(314, 56);
             this.dateTimePicker1.TabIndex = 18;
             // 
             // label6

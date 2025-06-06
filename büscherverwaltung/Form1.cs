@@ -17,6 +17,7 @@ namespace büscherverwaltung
         newbook newbook;
         borrow borrow;
         public int p_selectedbook = -1;
+        public int verdienst;
 
         public Form1()
         {
@@ -57,14 +58,21 @@ namespace büscherverwaltung
         {
             // List all books  
             büscherregal.Items.Clear();
+            verwarungen.Items.Clear();
             foreach (var book in buscher.büscherregal)
             {
                 büscherregal.Items.Add(book.title + "" + book.isbn + "" + "" + book.sellprice);
+                //warnings
+
+                if ((book.bisausgeliehn - DateTime.Now).TotalDays < 0 && book.isborrowed)
+                {
+                    verwarungen.Items.Add("Achtung: " + book.title + " " + book.isbn + " ist überfällig!"); // Add warning for overdue books
+                }
             }
             // Reset selected book index  
             p_selectedbook = -1;
             info_p.Items.Clear(); // Clear the info list box  
-            büscherregal.SelectedItems.Clear(); // Correctly deselect all selected items  
+            büscherregal.SelectedItems.Clear(); // Correctly deselect all selected items
         }
         //wenn busch in der listbox ausgewählt wurde
         private void büscherregal_SelectedIndexChanged(object sender, EventArgs e)
@@ -123,8 +131,38 @@ namespace büscherverwaltung
         // Fix for CS0021 and CS0201 errors in the "button4_Click" method  
         private void button4_Click(object sender, EventArgs e)
         {
-            if (!checkvalid()) return; // Exit if the book is not valid for borrowing    
-            buscher.büscherregal.RemoveAt(p_selectedbook); 
+            if (!checkvalid()) return; // Exit if the book is not valid for borrowing
+            verdienst += buscher.büscherregal[p_selectedbook].sellprice; // Add the book's sell price to the earnings
+            verdienst_l.Text = "Verdienst: " + verdienst + " €";
+            buscher.büscherregal.RemoveAt(p_selectedbook);
+            list();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (p_selectedbook == -1)
+            {
+                MessageBox.Show("Bitte wähle ein Buch aus.");
+                return;
+            }
+            if (!buscher.büscherregal[p_selectedbook].isborrowed)
+            {
+                MessageBox.Show("Dieses Buch ist nicht ausgeliehen.");
+                return;
+            }
+            // Find the person who borrowed the book and remove the borrowed book from their list
+            for (int i = 0; i < humans.people.Count; i++)
+            {
+                for (int j = 0; j < humans.people[i].borrowed_books.Count; j++)
+                {
+                    if (humans.people[i].borrowed_books[j].bookid == p_selectedbook)
+                    {
+                        humans.people[i].borrowed_books.RemoveAt(j);
+                        buscher.büscherregal[p_selectedbook].bisausgeliehn = DateTime.MinValue; // Reset the borrowed date
+                        break; // Stop after finding the first match
+                    }
+                }
+            }
             list();
         }
     }
